@@ -9,6 +9,8 @@ class Subject extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'user_id'];
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

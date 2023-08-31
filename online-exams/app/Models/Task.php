@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'text', 'picture', 'subject_id'];
+    
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

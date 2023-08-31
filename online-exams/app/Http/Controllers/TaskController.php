@@ -7,12 +7,6 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
-    public function index()
-    {
-        $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
-    }
-
     public function create()
     {
         return view('tasks.create');
@@ -28,11 +22,6 @@ class TaskController extends Controller
         $task->save();
 
         return redirect('tasks.index')->with('success', 'Task saved!');
-    }
-
-    public function show(Task $task)
-    {
-        return view('tasks.show', compact('task'));
     }
 
     public function edit($id)
