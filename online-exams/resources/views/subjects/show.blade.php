@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Tasks</h1>
-                <a href="#" class="btn btn-success my-3">Create Task</a>
+                <a href="{{ route('tasks.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Task</a>
                 <table class="table">
                     <thead>
                         <tr>

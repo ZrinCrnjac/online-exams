@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/subject-index.css') }}">
+
 @section('content')
     <div class="container">
         <div class="row">
