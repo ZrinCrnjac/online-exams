@@ -86,4 +86,31 @@ class ExamController extends Controller
             return redirect('subjects.index')->with('error', 'You are not allowed to delete this exam!');
         }
     }
+
+    public function random(Subject $subject)
+    {
+        // Select 5 tasks that belong to a subject and create a random exam from them
+
+        /** @var User $user */
+        $user = auth()->user();
+        $randomTasks = Task::where('subject_id', $subject->id)->inRandomOrder()->limit(5)->get();
+        // Exam name should be Random exam - current date time
+        $examName = 'Random exam - ' . date('Y-m-d H:i');
+
+        if($user->can('create exams')){
+            $exam = new Exam([
+                'name' => $examName,
+                'subject_id' => $subject->id,
+                'user_id' => $user->id,
+            ]);
+            $user->exams()->save($exam);
+
+            $tasks = $randomTasks->pluck('id');
+            $exam->tasks()->attach($tasks);
+
+            return redirect('exams.index')->with('success', 'Random Exam saved!');
+        }else{
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to create an exam!');
+        }
+    }
 }

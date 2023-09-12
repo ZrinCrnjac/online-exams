@@ -8,6 +8,7 @@
                 <h1>Tasks</h1>
                 <a href="{{ route('tasks.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Task</a><br>
                 <a href="{{ route('exams.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Exam</a><br>
+                <a href="{{ route('exams.random', ['subject' => $subject]) }}" class="btn btn-success my-3">Generate Random Exam</a><br>
                 <table class="table">
                     <thead>
                         <tr>

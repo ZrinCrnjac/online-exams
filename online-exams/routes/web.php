@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/exams', [ExamController::class, 'store'])->name('exams.store');
     Route::get('/exams/{exam}', [ExamController::class, 'show'])->name('exams.show');
     Route::delete('/exams/{exam}', [ExamController::class, 'destroy'])->name('exams.destroy');
+    Route::get('/exams/random/{subject}', [ExamController::class, 'random'])->name('exams.random');
 });
 
 require __DIR__.'/auth.php';
