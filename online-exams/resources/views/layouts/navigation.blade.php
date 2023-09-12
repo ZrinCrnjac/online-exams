@@ -9,6 +9,11 @@
                         {{ __('Subjects') }}
                     </x-nav-link>
                 </div>
+                <div>
+                    <x-nav-link :href="route('exams.index')" :active="request()->routeIs('exams.index')">
+                        {{ __('Exams') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

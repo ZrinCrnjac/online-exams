@@ -6,17 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\Exam;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Subject;
 
 class ExamController extends Controller
 {
-    public function create(Request $request)
+
+    public function index()
     {
         /** @var User $user */
         $user = auth()->user();
-        $tasks = $request->get('tasks');
+
+        if($user->can('read exams')) {
+            $exams = Exam::where('user_id', $user->id)->get();
+
+            return view('exams.index', compact('exams'));
+        } else {
+            return redirect('subjects.index')->with('error', 'You are not allowed to view exams!');
+        }
+    }
+
+    public function create(Subject $subject)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $tasks = Task::where('subject_id', $subject->id)->get();
 
         if($user->can('create exams')){
-            return view('exams.create', compact('tasks'));
+            return view('exams.create', compact('subject', 'tasks'));
         }else{
             return redirect()->route('subjects.index')->with('error', 'You are not allowed to create an exam!');
         }
@@ -30,13 +46,15 @@ class ExamController extends Controller
         if($user->can('create exams')) {
             $exam = new Exam([
                 'name' => $request->get('name'),
+                'subject_id' => $request->get('subject_id'),
+                'user_id' => $user->id,
             ]);
             $user->exams()->save($exam);
 
             $tasks = $request->get('tasks');
             $exam->tasks()->attach($tasks);
 
-            return redirect('subjects.index')->with('success', 'Exam saved!');
+            return redirect('exams.index')->with('success', 'Exam saved!');
         } else {
             return redirect('subjects.index')->with('error', 'You are not allowed to create an exam!');
         }
@@ -44,8 +62,15 @@ class ExamController extends Controller
 
     public function show(Exam $exam)
     {
-        $tasks = Task::where('exam_id', $exam->id)->get();
-        return view('exams.show', compact('exam', 'tasks'));
+        /** @var User $user */
+        $user = auth()->user();
+        $tasks = $exam->tasks()->get();
+
+        if($user->can('read exams')) {
+            return view('exams.show', compact('exam', 'tasks'));
+        } else {
+            return redirect('subjects.index')->with('error', 'You are not allowed to view this exam!');
+        }
     }
 
     public function destroy(Exam $exam)

@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <h1>Tasks</h1>
                 <a href="{{ route('tasks.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Task</a><br>
-                <a href="{{ route('exams.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Exam</a>
+                <a href="{{ route('exams.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Exam</a><br>
                 <table class="table">
                     <thead>
                         <tr>
