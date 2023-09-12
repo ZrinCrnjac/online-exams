@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/subjects/{subject}/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
     Route::patch('/subjects/{subject}/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/subjects/{subject}/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
+    Route::post('/exams', [ExamController::class, 'store'])->name('exams.store');
+    Route::get('/exams/{exam}', [ExamController::class, 'show'])->name('exams.show');
+    Route::delete('/exams/{exam}', [ExamController::class, 'destroy'])->name('exams.destroy');
 });
 
 require __DIR__.'/auth.php';

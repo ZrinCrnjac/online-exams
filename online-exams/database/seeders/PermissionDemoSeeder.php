@@ -27,6 +27,13 @@ class PermissionDemoSeeder extends Seeder{
         Permission::create(['name' => 'update tasks']);
         Permission::create(['name' => 'delete tasks']);
 
+        Permission::create(['name' => 'create exams']);
+        Permission::create(['name' => 'read exams']);
+        Permission::create(['name' => 'update exams']);
+        Permission::create(['name' => 'delete exams']);
+
+        Permission::create(['name' => 'add roles']);
+
         // create roles and assign created permissions
         $role1 = Role::create(['name' => 'admin']); // gets everything
 
@@ -35,10 +42,21 @@ class PermissionDemoSeeder extends Seeder{
         $role2->givePermissionTo('read subjects');
         $role2->givePermissionTo('update subjects');
         $role2->givePermissionTo('delete subjects');
+        $role2->givePermissionTo('create exams');
+        $role2->givePermissionTo('read exams');
+        $role2->givePermissionTo('update exams');
+        $role2->givePermissionTo('delete exams');
+        $role2->givePermissionTo('create tasks');
+        $role2->givePermissionTo('read tasks');
+        $role2->givePermissionTo('update tasks');
+        $role2->givePermissionTo('delete tasks');
 
         $role3 = Role::create(['name' => 'student']);
         $role3->givePermissionTo('read subjects');
         $role3->givePermissionTo('read tasks');
+        $role3->givePermissionTo('read exams');
+        $role3->givePermissionTo('create exams');
+        $role3->givePermissionTo('update exams');
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin User',

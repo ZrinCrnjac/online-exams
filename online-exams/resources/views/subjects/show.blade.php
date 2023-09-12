@@ -6,11 +6,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Tasks</h1>
-                <a href="{{ route('tasks.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Task</a>
+                <a href="{{ route('tasks.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Task</a><br>
+                <a href="{{ route('exams.create', ['subject' => $subject]) }}" class="btn btn-success my-3">Create Exam</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Task Name</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Text</th>
                             <th scope="col">Actions</th>
                         </tr>

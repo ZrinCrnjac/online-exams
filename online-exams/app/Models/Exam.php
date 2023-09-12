@@ -5,19 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Exam extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'text', 'picture', 'subject_id'];
-    
+    protected $fillable = ['name', 'subject_id', 'user_id'];
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
 
-    public function exams()
+    public function user()
     {
-        return $this->belongsToMany(Exam::class);
+        return $this->belongsTo(User::class);
     }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+    }
+
 }
