@@ -89,8 +89,6 @@ class ExamController extends Controller
 
     public function random(Subject $subject)
     {
-        // Select 5 tasks that belong to a subject and create a random exam from them
-
         /** @var User $user */
         $user = auth()->user();
         $randomTasks = Task::where('subject_id', $subject->id)->inRandomOrder()->limit(5)->get();

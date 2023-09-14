@@ -14,6 +14,14 @@
                         {{ __('Exams') }}
                     </x-nav-link>
                 </div>
+                <!-- add a link for admins to manage user roles -->
+                @can('add roles')
+                    <div>
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->
