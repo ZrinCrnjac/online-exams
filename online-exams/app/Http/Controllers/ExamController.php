@@ -92,7 +92,6 @@ class ExamController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $randomTasks = Task::where('subject_id', $subject->id)->inRandomOrder()->limit(5)->get();
-        // Exam name should be Random exam - current date time
         $examName = 'Random exam - ' . date('Y-m-d H:i');
 
         if($user->can('create exams')){
