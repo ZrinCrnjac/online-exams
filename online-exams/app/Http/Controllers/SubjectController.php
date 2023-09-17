@@ -38,9 +38,9 @@ class SubjectController extends Controller
             ]);
             $user->subjects()->save($subject);
 
-            return redirect('/subjects')->with('success', 'Subject saved!');
+            return redirect()->route('/subjects')->with('success', 'Subject saved!');
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to create a subject!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to create a subject!');
         }
     }
 

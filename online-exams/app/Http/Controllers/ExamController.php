@@ -21,7 +21,7 @@ class ExamController extends Controller
 
             return view('exams.index', compact('exams'));
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to view exams!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to view exams!');
         }
     }
 
@@ -54,9 +54,9 @@ class ExamController extends Controller
             $tasks = $request->get('tasks');
             $exam->tasks()->attach($tasks);
 
-            return redirect('exams.index')->with('success', 'Exam saved!');
+            return redirect()->route('exams.index')->with('success', 'Exam saved!');
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to create an exam!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to create an exam!');
         }
     }
 
@@ -69,7 +69,7 @@ class ExamController extends Controller
         if($user->can('read exams')) {
             return view('exams.show', compact('exam', 'tasks'));
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to view this exam!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to view this exam!');
         }
     }
 
@@ -81,9 +81,9 @@ class ExamController extends Controller
         if($user->can('delete exams')) {
             $exam->delete();
 
-            return redirect('subjects.index')->with('success', 'Exam deleted!');
+            return redirect()->route('subjects.index')->with('success', 'Exam deleted!');
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to delete this exam!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to delete this exam!');
         }
     }
 
@@ -105,7 +105,7 @@ class ExamController extends Controller
             $tasks = $randomTasks->pluck('id');
             $exam->tasks()->attach($tasks);
 
-            return redirect('exams.index')->with('success', 'Random Exam saved!');
+            return redirect()->route('exams.index')->with('success', 'Random Exam saved!');
         }else{
             return redirect()->route('subjects.index')->with('error', 'You are not allowed to create an exam!');
         }

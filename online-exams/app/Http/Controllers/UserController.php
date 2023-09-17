@@ -18,7 +18,7 @@ class UserController extends Controller
 
             return view('users.index', compact('users'));
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to view users!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to view users!');
         }
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
             $user = User::find($user->id);
             return view('users.edit', compact('user', 'roles'));
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to edit users!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to edit users!');
         }
     }
 
@@ -46,9 +46,9 @@ class UserController extends Controller
             $user->roles()->detach();
             $user->assignRole($request->get('role'));
 
-            return redirect('users.index')->with('success', 'Role assigned!');
+            return redirect()->route('users.index')->with('success', 'Role assigned!');
         } else {
-            return redirect('subjects.index')->with('error', 'You are not allowed to assign roles!');
+            return redirect()->route('subjects.index')->with('error', 'You are not allowed to assign roles!');
         }
     }
 }
